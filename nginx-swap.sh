@@ -18,7 +18,7 @@ fi
 # Initialize defaults
 ACME_SH_PATH="/root/.acme.sh/acme.sh"
 FREENAS_FQDN=$(hostname -f)
-CONFIG_NAME="nextcloud-config"
+CONFIG_NAME="nginx-swap-config"
 
 
 # Check for nginx-swap-config and set configuration
