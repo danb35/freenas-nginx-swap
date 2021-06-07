@@ -52,6 +52,13 @@ cp -f /usr/local/etc/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf.bak
 
 # Create new nginx.conf
 cat <<__EOF__ >/usr/local/etc/nginx/nginx.conf
+
+# 
+# Temporary nginx configuration file
+# This file should only be used while obtaining a cert from
+# an ACME certificate authority
+# 
+
 user www www;
 worker_processes  1;
 
