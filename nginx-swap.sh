@@ -47,6 +47,13 @@ if [ -z "${CA_CERT_PATH}" ]; then
   exit 1
 fi
 
+# Check the existing nginx.conf, make sure it's the FreeNAS file
+if ! grep 'FreeNAS\|TrueNAS' /usr/local/etc/nginx/nginx.conf
+then
+	echo "nginx.conf appears to have been modified, aborting."
+	exit 1
+fi
+
 # Back up nginx.conf
 cp -f /usr/local/etc/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf.bak
 
