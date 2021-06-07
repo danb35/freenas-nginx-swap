@@ -3,7 +3,7 @@
 This script was written to address kind of a niche situation.  I have a [local certificate authority](https://smallstep.com/blog/build-a-tiny-ca-with-raspberry-pi-yubikey/) running at home, and I was wanting to get certificates for my TrueNAS server from that CA using HTTP validation.  That requires your server to serve a challenge file at `http://your_fqdn/.well-known/acme-challenge/something`, and the TrueNAS web UI conflicts with this.  To make issuance possible, this script replaces the TrueNAS Nginx config file with a temporary configuration, issues the cert, and then restores the previous configuration.
 
 ## Installation
-Change to a convenient directory on your TrueNAS server and run `https://github.com/danb35/freenas-nginx-swap`
+Change to a convenient directory on your TrueNAS server and run `git clone https://github.com/danb35/freenas-nginx-swap`
 
 ## Configuration
 Change to the script's directory and create a configuration file called `nginx-swap-config`.  In its most minimal form, it will look like this:
