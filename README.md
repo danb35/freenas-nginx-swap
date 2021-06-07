@@ -20,6 +20,8 @@ Available options are:
 ## Execution
 Run the script.  It will back up nginx.conf, replace it with the temporary config, call acme.sh to issue the cert, and then replace nginx.conf with the backed-up version.  **Note:** This script doesn't do anything to deploy the new cert--you may want to investigate [deploy-freenas](https://github.com/danb35/deploy-freenas) for that purpose.
 
+For debugging purposes, add the `-d` flag (`./nginx-swap -d`).  This will run `acme.sh` with the `--debug` option.
+
 ## Troubleshooting
 If you interrupt this script, you may leave your Free/TrueNAS system with the temporary Nginx configuration file, which will break the web UI and API.  If you're getting 403 errors when trying to reach the UI, this has probably happened.  To confirm, check `/usr/local/etc/nginx/nginx.conf`.  If you don't see these first few lines:
 

@@ -17,9 +17,21 @@ fi
 
 # Initialize defaults
 ACME_SH_PATH="/root/.acme.sh/acme.sh"
+ACME_SH_ARGS=""
 FREENAS_FQDN=$(hostname -f)
 CONFIG_NAME="nginx-swap-config"
 
+# Check for debug flag
+while getopts ":d" o; do
+	case "${o}" in
+		d)
+			ACME_SH_ARGS="--debug"
+			;;
+		*)
+			echo "Usage: $0 [-d]"
+			exit 1
+	esac
+done
 
 # Check for nginx-swap-config and set configuration
 SCRIPT=$(readlink -f "$0")
@@ -99,8 +111,10 @@ __EOF__
 service nginx reload
 
 # Issue the cert
-"${ACME_SH_PATH}" --issue --force -w /tmp -d "${FREENAS_FQDN}" \
-  --server "${CA_URL}" --ca-bundle "${CA_CERT_PATH}"
+"${ACME_SH_PATH}" "${ACME_SH_ARGS}" --issue --force -w /tmp \
+  -d "${FREENAS_FQDN}" \
+  --server "${CA_URL}" \
+  --ca-bundle "${CA_CERT_PATH}"
   
 # Restore nginx.conf and reload
 cp -f /usr/local/etc/nginx/nginx.conf.bak /usr/local/etc/nginx/nginx.conf
